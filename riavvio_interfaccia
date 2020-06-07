@@ -1,9 +1,9 @@
 #!/bin/bash
 
-sito="www.google.it"
+sito="1.1.1.1"
 Nc=10 #Numero di verifice prima dell'riavvio
-A1=3 #Tempo di attesa per la verifica della connessione internet 
-A2=2 #Tempo di attesa tra un ping e l'altro prima del riavvio dell'interfaccia
+A1=1800 #Tempo di attesa per la verifica della connessione internet 
+A2=10 #Tempo di attesa tra un ping e l'altro prima del riavvio dell'interfaccia
 A3=60 #Tempo di attesa dopo il riavvio dell'interfaccia
 Pc=0
 
