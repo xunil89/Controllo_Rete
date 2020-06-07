@@ -15,7 +15,6 @@ p=1
 while [ $p == 1 ]
 do 
 	ping -c 1 $sito && p=1 || p=0
-	echo $p
 	sleep $A1
 done
 ver_lin_forz
@@ -29,14 +28,13 @@ p2=0
 while [ $Pc -le $Nc ]
 do
 ping -c 1 $sito && p2=0 || p2=1
-	echo $p2
 		if [ $p2 == 0 ]
 		then
 			ver_line
 			brake
 		fi
-		Pc=$(( $Pc + $p2 ))
-		sleep $A2
+			Pc=$(( $Pc + $p2 ))
+			sleep $A2
 done
 	Pc=0
 	reboot_interface
