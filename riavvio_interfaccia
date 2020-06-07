@@ -1,9 +1,9 @@
 #!/bin/bash
 
 sito="1.1.1.1"
-Nc=10 #Numero di verifice prima dell'riavvio
-A1=1800 #Tempo di attesa per la verifica della connessione internet 
-A2=10 #Tempo di attesa tra un ping e l'altro prima del riavvio dell'interfaccia
+Nc=2 #Numero di verifice prima dell'riavvio
+A1=1 #Tempo di attesa per la verifica della connessione internet 
+A2=2 #Tempo di attesa tra un ping e l'altro prima del riavvio dell'interfaccia
 A3=60 #Tempo di attesa dopo il riavvio dell'interfaccia
 Pc=0
 
@@ -17,7 +17,7 @@ do
 	ping -c 1 $sito && p=1 || p=0
 	sleep $A1
 done
-ver_lin_forz
+	ver_lin_forz
 }
 
 #Questa funzione verifica con la periodicità A2 la presenza di connessione di rete per Nc volte prima di effettuare il riavvio
@@ -25,27 +25,32 @@ ver_lin_forz
 function ver_lin_forz()
 {
 p2=0
+b=0
 while [ $Pc -le $Nc ]
 do
 ping -c 1 $sito && p2=0 || p2=1
+	sleep 2
 		if [ $p2 == 0 ]
 		then
-			ver_line
-			brake
+			b=1
+			break
 		fi
 			Pc=$(( $Pc + $p2 ))
 			sleep $A2
 done
-	Pc=0
-	reboot_interface
+	if [ $b == 0 ]
+	then
+		Pc=0
+		reboot_interface
+	fi
+		ver_line	
 
 }
 
 function reboot_interface()
 {
-	#Riavvio interfaccia
+	echo "riavvia"
 	sleep $A3
-	ver_line
 }
 
 
